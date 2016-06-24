@@ -21,10 +21,9 @@
   when: ruby_test_vars.rc == 1 and ruby_src_test_vars.rc == 1
 
 - name: Rubyのソースコードを展開
-  unarchive:
-    src={{ work_dir }}/{{ ruby_archive_name }}
-    dest={{ work_dir }}
-    copy=no
+  command:
+    bzip2 -dc {{ ruby_archive_name }} | tar xvf -
+    chdir={{ work_dir }}
   when: ruby_test_vars.rc == 1 and ruby_src_test_vars.rc == 1
 
 - name: Rubyのビルド1 (configure)
